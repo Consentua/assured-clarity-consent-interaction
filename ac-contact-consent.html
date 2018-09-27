@@ -5,13 +5,8 @@
     <title>consentua custom interaction</title>
     <script src="https://websdk.consentua.com/websdk/consentua-interaction.js"></script>
     <script src="https://websdk.consentua.com/websdk/comms.js"></script>
-    <link
-        rel='stylesheet'
-        id='et-builder-googlefonts-cached-css'
-        href='https://fonts.googleapis.com/css?family=Cabin%3Aregular%2Citalic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%7CEncode+Sans%3A100%2C200%2C300%2Cregular%2C500%2C600%2C700%2C800%2C900&#038;ver=4.9.8#038;subset=latin,latin-ext'
-        type='text/css'
-        media='all'
-    />
+    <link rel='stylesheet' id='et-builder-googlefonts-cached-css' href='https://fonts.googleapis.com/css?family=Cabin%3Aregular%2Citalic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%7CEncode+Sans%3A100%2C200%2C300%2Cregular%2C500%2C600%2C700%2C800%2C900&#038;ver=4.9.8#038;subset=latin,latin-ext'
+          type='text/css' media='all' />
     <style>
         :root {
             --main-color: #4e5187;
@@ -41,6 +36,15 @@
             font-weight: 300;
             text-align: center;
             color: var(--main-color, #4e5187);
+        }
+
+        h1 {
+            font-weight: 300;
+            font-style: normal;
+            font-size: 28px;
+            letter-spacing: 0em;
+            line-height: 1.4em;
+            text-transform: none;
         }
 
         h3 {
@@ -138,12 +142,16 @@
             -webkit-transform: scale(1.4);
             transform: scale(1.4);
             margin-top: 1.3rem;
-            flex-wrap: wrap;
 
         }
 
         #cb {
             display: none;
+        }
+        
+        .tgl+.tgl-txt{
+            font-size: 1rem;
+            font-family: 'Cabin', Helvetica, Arial, Lucida, sans-serif;
         }
 
         .tgl+.tgl-lbl {
@@ -219,37 +227,23 @@
 <body>
     <main>
         <p>
-            <h2 id="dataUse"></h2>
+            <h1 id="dataUse"></h1>
         </p>
         <section>
             <ol id="purposes"></ol>
             <div id="tgl-contain">
-                <label
-                    class="tgl-lbl-txt"
-                    for="cb"
-                >I consent to this use of my data</label>
-                <input
-                    class="tgl tgl-cb"
-                    id="cb"
-                    type="checkbox"
-                />
-                <label
-                    class="tgl-lbl"
-                    for="cb"
-                ></label>
+                <label class="tgl-lbl-txt" for="cb">I consent to this use of my data</label>
+                <input class="tgl tgl-cb" id="cb" type="checkbox" />
+                <label class="tgl-lbl" for="cb"></label>
             </div>
         </section>
     </main>
     <script>
         document.body.addEventListener("consentua-ready", function () {
-            window.consentua.ready()
             console.log("Consentua is ready; setting up the simple interaction", window.consentua);
-            console.log(window.consentua.template)
-            var pgs = window.consentua.template.PurposeGroups;
-            console.log("Purpose groups", pgs);
             document.getElementById('dataUse').innerHTML = window.consentua.template.Question;
-            for (let i = 0; i < pgs.length; i++) {
-                let pg = pgs[i];
+            for (let i = 0; i < window.consentua.template.PurposeGroups.length; i++) {
+                let pg = window.consentua.template.PurposeGroups[i];
                 let purposes = "";
                 console.log("PG " + i, pg.Purposes);
                 for (var j in pg.Purposes) {
@@ -260,12 +254,12 @@
                 let p = document.createElement('li');
                 p.innerHTML = purposes + "<br />";
                 document.getElementById('purposes').appendChild(p);
+                window.consentua.ready();
             }
             // on consent change
             document.getElementById('cb').addEventListener('change', (event) => {
-                var groups = window.consentua.template.PurposeGroups;
                 var groupids = [];
-                for (var i in groups) {
+                for (var i in window.consentua.template.PurposeGroups) {
                     groupids.push(i);
                 }
                 console.log("Toggle consent on purpose groups", groupids, event.target.checked);
