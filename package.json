@@ -1,0 +1,19 @@
+{
+  "name": "assured-clarity-consent-interaction",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mrsideshowjack/assured-clarity-consent-interaction.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mrsideshowjack/assured-clarity-consent-interaction/issues"
+  },
+  "homepage": "https://github.com/mrsideshowjack/assured-clarity-consent-interaction#readme"
+}
