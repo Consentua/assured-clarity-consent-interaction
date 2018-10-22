@@ -257,7 +257,7 @@
                 window.consentua.ready();
             }
             // on consent change
-            document.getElementById('cb').addEventListener('change', (event) => {
+            document.getElementById('cb').addEventListener('change', function(event) {
                 var groupids = [];
                 for (var i in window.consentua.template.PurposeGroups) {
                     groupids.push(i);
